@@ -1,0 +1,16 @@
+
+#ifndef __STREAMxxx_H__
+#define __STREAMxxx_H__
+
+#include "suli2.h"
+#include "rpc_server.h"
+
+void stream_init();
+
+char stream_read();
+
+bool stream_write(char c);
+
+void writer_print(type_t type, const void *data);
+
+#endif

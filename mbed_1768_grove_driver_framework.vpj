@@ -1,0 +1,735 @@
+<!DOCTYPE Project SYSTEM "http://www.slickedit.com/dtd/vse/10.0/vpj.dtd">
+<Project
+    Version="10.0"
+    VendorName="SlickEdit"
+    TemplateName="Cross Platform C++ Wizard"
+    WorkingDir=".">
+    <Config
+        Name="WinDebug"
+        Type="vcpp"
+        Version="1"
+        DebugCallbackName="windbg"
+        OutputFile="%bdmbed_1768_grove_driver_framework"
+        CompilerConfigName="">
+        <Menu>
+            <Target
+                Name="Compile"
+                MenuCaption="&amp;Compile"
+                Dialog="_vcpp_options_form Compile"
+                CaptureOutputWith="ProcessBuffer"
+                Deletable="0"
+                OutputExts="*.o"
+                SaveOption="SaveCurrent"
+                RunFromDir="%rw">
+                <Exec
+                    CmdLine='cl /c %defs /W3 /GB /Ob0 /Gd /GS %~other /Fo"%bd%n%oe" %i "%f"'
+                    OtherOptions="/nologo"/>
+            </Target>
+            <Target
+                Name="Link"
+                MenuCaption="&amp;Link"
+                ShowOnMenu="Never"
+                Dialog="_vcpp_options_form Link"
+                CaptureOutputWith="ProcessBuffer"
+                Deletable="0"
+                SaveOption="SaveCurrent"
+                RunFromDir="%rw">
+                <Exec
+                    CmdLine='link %~other /INCREMENTAL /OUT:"%o" %f %libs'
+                    OtherOptions="/NOLOGO"/>
+            </Target>
+            <Target
+                Name="Build"
+                MenuCaption="&amp;Build"
+                CaptureOutputWith="ProcessBuffer"
+                Deletable="0"
+                SaveOption="SaveWorkspaceFiles"
+                RunFromDir="%rw">
+                <Exec CmdLine="make "/>
+            </Target>
+            <Target
+                Name="Rebuild"
+                MenuCaption="&amp;Rebuild"
+                CaptureOutputWith="ProcessBuffer"
+                Deletable="0"
+                SaveOption="SaveWorkspaceFiles"
+                RunFromDir="%rw">
+                <Exec CmdLine=""/>
+            </Target>
+            <Target
+                Name="Execute"
+                MenuCaption="E&amp;xecute"
+                Dialog="_vcpp_options_form Run/Debug"
+                BuildFirst="1"
+                CaptureOutputWith="ProcessBuffer"
+                Deletable="0"
+                SaveOption="SaveWorkspaceFiles"
+                RunFromDir="%rw">
+                <Exec CmdLine='"%o"'/>
+            </Target>
+            <Target
+                Name="DebugWinDbg"
+                MenuCaption="Debug - WinDbg"
+                SaveOption="SaveNone"
+                RunFromDir="%rw">
+                <Exec
+                    CmdLine="vcproj_windbg_debug"
+                    Type="Slick-C"/>
+            </Target>
+            <Target
+                Name="DebugVisualStudio"
+                MenuCaption="Debug - Visual Studio"
+                SaveOption="SaveNone"
+                RunFromDir="%rw">
+                <Exec CmdLine='devenv "%o"'/>
+            </Target>
+            <Target
+                Name="DebugMDbg"
+                MenuCaption="&amp;Debug - MDbg"
+                Dialog="_vcpp_options_form Run/Debug"
+                Deletable="0"
+                SaveOption="SaveNone"
+                EnableBuildFirst="0"
+                RunFromDir="%rw">
+                <Exec CmdLine='mdbg "%o"'/>
+            </Target>
+            <Target
+                Name="dash"
+                MenuCaption="-"
+                Deletable="0">
+                <Exec/>
+            </Target>
+            <Target
+                Name="Visual C++ Options"
+                MenuCaption="Visual C++ &amp;Options..."
+                ShowOnMenu="HideIfNoCmdLine"
+                Deletable="0"
+                SaveOption="SaveNone">
+                <Exec
+                    CmdLine="vcppoptions"
+                    Type="Slick-C"/>
+            </Target>
+        </Menu>
+        <Includes></Includes>
+        <List Name="GNUC Options">
+            <Item
+                Name="LinkerOutputType"
+                Value="Executable"/>
+        </List>
+    </Config>
+    <Config
+        Name="WinRelease"
+        Type="vcpp"
+        Version="1"
+        DebugCallbackName="windbg"
+        OutputFile="%bdmbed_1768_grove_driver_framework"
+        CompilerConfigName="">
+        <Menu>
+            <Target
+                Name="Compile"
+                MenuCaption="&amp;Compile"
+                Dialog="_vcpp_options_form Compile"
+                CaptureOutputWith="ProcessBuffer"
+                Deletable="0"
+                OutputExts="*.o"
+                SaveOption="SaveCurrent"
+                RunFromDir="%rw">
+                <Exec
+                    CmdLine='cl /c %defs /W3 /GB /Ob0 /Gd /GS %~other /Fo"%bd%n%oe" %i "%f"'
+                    OtherOptions="/nologo"/>
+            </Target>
+            <Target
+                Name="Link"
+                MenuCaption="&amp;Link"
+                ShowOnMenu="Never"
+                Dialog="_vcpp_options_form Link"
+                CaptureOutputWith="ProcessBuffer"
+                Deletable="0"
+                SaveOption="SaveCurrent"
+                RunFromDir="%rw">
+                <Exec
+                    CmdLine='link %~other /INCREMENTAL /OUT:"%o" %f %libs'
+                    OtherOptions="/NOLOGO"/>
+            </Target>
+            <Target
+                Name="Build"
+                MenuCaption="&amp;Build"
+                CaptureOutputWith="ProcessBuffer"
+                Deletable="0"
+                SaveOption="SaveWorkspaceFiles"
+                RunFromDir="%rw">
+                <Exec CmdLine="make "/>
+            </Target>
+            <Target
+                Name="Rebuild"
+                MenuCaption="&amp;Rebuild"
+                CaptureOutputWith="ProcessBuffer"
+                Deletable="0"
+                SaveOption="SaveWorkspaceFiles"
+                RunFromDir="%rw">
+                <Exec CmdLine=""/>
+            </Target>
+            <Target
+                Name="Execute"
+                MenuCaption="E&amp;xecute"
+                Dialog="_vcpp_options_form Run/Debug"
+                BuildFirst="1"
+                CaptureOutputWith="ProcessBuffer"
+                Deletable="0"
+                SaveOption="SaveWorkspaceFiles"
+                RunFromDir="%rw">
+                <Exec CmdLine='"%o"'/>
+            </Target>
+            <Target
+                Name="DebugWinDbg"
+                MenuCaption="Debug - WinDbg"
+                SaveOption="SaveNone"
+                RunFromDir="%rw">
+                <Exec
+                    CmdLine="vcproj_windbg_debug"
+                    Type="Slick-C"/>
+            </Target>
+            <Target
+                Name="DebugVisualStudio"
+                MenuCaption="Debug - Visual Studio"
+                SaveOption="SaveNone"
+                RunFromDir="%rw">
+                <Exec CmdLine='devenv "%o"'/>
+            </Target>
+            <Target
+                Name="DebugMDbg"
+                MenuCaption="&amp;Debug - MDbg"
+                Dialog="_vcpp_options_form Run/Debug"
+                Deletable="0"
+                SaveOption="SaveNone"
+                EnableBuildFirst="0"
+                RunFromDir="%rw">
+                <Exec CmdLine='mdbg "%o"'/>
+            </Target>
+            <Target
+                Name="dash"
+                MenuCaption="-"
+                Deletable="0">
+                <Exec/>
+            </Target>
+            <Target
+                Name="Visual C++ Options"
+                MenuCaption="Visual C++ &amp;Options..."
+                ShowOnMenu="HideIfNoCmdLine"
+                Deletable="0"
+                SaveOption="SaveNone">
+                <Exec
+                    CmdLine="vcppoptions"
+                    Type="Slick-C"/>
+            </Target>
+        </Menu>
+        <Includes></Includes>
+        <List Name="GNUC Options">
+            <Item
+                Name="LinkerOutputType"
+                Value="Executable"/>
+        </List>
+    </Config>
+    <Config
+        Name="UnixDebug"
+        Type="gnuc"
+        DebugCallbackName="gdb"
+        Version="1"
+        OutputFile="%bdmbed_1768_grove_driver_framework"
+        CompilerConfigName="Latest Version">
+        <Menu>
+            <Target
+                Name="Compile"
+                MenuCaption="&amp;Compile"
+                Dialog="_gnuc_options_form Compile"
+                CaptureOutputWith="ProcessBuffer"
+                Deletable="0"
+                OutputExts="*.o"
+                SaveOption="SaveCurrent"
+                RunFromDir="%rw">
+                <Exec CmdLine='g++ -c %xup  %defd -g -o "%bd%n%oe" %i "%f"'/>
+            </Target>
+            <Target
+                Name="Link"
+                MenuCaption="&amp;Link"
+                ShowOnMenu="Never"
+                Dialog="_gnuc_options_form Link"
+                CaptureOutputWith="ProcessBuffer"
+                Deletable="0"
+                SaveOption="SaveCurrent"
+                RunFromDir="%rw">
+                <Exec CmdLine='g++ %xup -g -o "%o" %f %libs'/>
+            </Target>
+            <Target
+                Name="Build"
+                MenuCaption="&amp;Build"
+                CaptureOutputWith="ProcessBuffer"
+                Deletable="0"
+                SaveOption="SaveWorkspaceFiles"
+                RunFromDir="%rw">
+                <Exec CmdLine="make "/>
+            </Target>
+            <Target
+                Name="Rebuild"
+                MenuCaption="&amp;Rebuild"
+                CaptureOutputWith="ProcessBuffer"
+                Deletable="0"
+                SaveOption="SaveWorkspaceFiles"
+                RunFromDir="%rw">
+                <Exec CmdLine=""/>
+            </Target>
+            <Target
+                Name="Debug"
+                MenuCaption="&amp;Debug"
+                Dialog="_gnuc_options_form Run/Debug"
+                BuildFirst="1"
+                CaptureOutputWith="ProcessBuffer"
+                Deletable="0"
+                SaveOption="SaveNone"
+                RunFromDir="%rw">
+                <Exec CmdLine='vsdebugio -prog "%o"'/>
+            </Target>
+            <Target
+                Name="Execute"
+                MenuCaption="E&amp;xecute"
+                Dialog="_gnuc_options_form Run/Debug"
+                BuildFirst="1"
+                CaptureOutputWith="ProcessBuffer"
+                Deletable="0"
+                SaveOption="SaveWorkspaceFiles"
+                RunFromDir="%rw">
+                <Exec CmdLine='"%o"'/>
+            </Target>
+            <Target
+                Name="dash"
+                MenuCaption="-"
+                Deletable="0">
+                <Exec/>
+            </Target>
+            <Target
+                Name="GNU C Options"
+                MenuCaption="GNU C &amp;Options..."
+                ShowOnMenu="HideIfNoCmdLine"
+                Deletable="0"
+                SaveOption="SaveNone">
+                <Exec
+                    CmdLine="gnucoptions"
+                    Type="Slick-C"/>
+            </Target>
+        </Menu>
+        <List Name="GNUC Options">
+            <Item
+                Name="LinkerOutputType"
+                Value="Executable"/>
+        </List>
+    </Config>
+    <Config
+        Name="UnixRelease"
+        Type="gnuc"
+        DebugCallbackName="gdb"
+        Version="1"
+        OutputFile="%bdmbed_1768_grove_driver_framework"
+        CompilerConfigName="Latest Version">
+        <Menu>
+            <Target
+                Name="Compile"
+                MenuCaption="&amp;Compile"
+                Dialog="_gnuc_options_form Compile"
+                CaptureOutputWith="ProcessBuffer"
+                Deletable="0"
+                OutputExts="*.o"
+                SaveOption="SaveCurrent"
+                RunFromDir="%rw">
+                <Exec CmdLine='g++ -c %xup %defd -o "%bd%n%oe" %i "%f"'/>
+            </Target>
+            <Target
+                Name="Link"
+                MenuCaption="&amp;Link"
+                ShowOnMenu="Never"
+                Dialog="_gnuc_options_form Link"
+                CaptureOutputWith="ProcessBuffer"
+                Deletable="0"
+                SaveOption="SaveCurrent"
+                RunFromDir="%rw">
+                <Exec CmdLine='g++ %xup -o "%o" %f %libs'/>
+            </Target>
+            <Target
+                Name="Build"
+                MenuCaption="&amp;Build"
+                CaptureOutputWith="ProcessBuffer"
+                Deletable="0"
+                SaveOption="SaveWorkspaceFiles"
+                RunFromDir="%rw">
+                <Exec CmdLine="make "/>
+            </Target>
+            <Target
+                Name="Rebuild"
+                MenuCaption="&amp;Rebuild"
+                CaptureOutputWith="ProcessBuffer"
+                Deletable="0"
+                SaveOption="SaveWorkspaceFiles"
+                RunFromDir="%rw">
+                <Exec CmdLine=""/>
+            </Target>
+            <Target
+                Name="Debug"
+                MenuCaption="&amp;Debug"
+                Dialog="_gnuc_options_form Run/Debug"
+                BuildFirst="1"
+                CaptureOutputWith="ProcessBuffer"
+                Deletable="0"
+                SaveOption="SaveNone"
+                RunFromDir="%rw">
+                <Exec CmdLine='vsdebugio -prog "%o"'/>
+            </Target>
+            <Target
+                Name="Execute"
+                MenuCaption="E&amp;xecute"
+                Dialog="_gnuc_options_form Run/Debug"
+                BuildFirst="1"
+                CaptureOutputWith="ProcessBuffer"
+                Deletable="0"
+                SaveOption="SaveWorkspaceFiles"
+                RunFromDir="%rw">
+                <Exec CmdLine='"%o"'/>
+            </Target>
+            <Target
+                Name="dash"
+                MenuCaption="-"
+                Deletable="0">
+                <Exec/>
+            </Target>
+            <Target
+                Name="GNU C Options"
+                MenuCaption="GNU C &amp;Options..."
+                ShowOnMenu="HideIfNoCmdLine"
+                Deletable="0"
+                SaveOption="SaveNone">
+                <Exec
+                    CmdLine="gnucoptions"
+                    Type="Slick-C"/>
+            </Target>
+        </Menu>
+        <List Name="GNUC Options">
+            <Item
+                Name="LinkerOutputType"
+                Value="Executable"/>
+        </List>
+    </Config>
+    <Config
+        Name="MacDebug"
+        Type="gnuc"
+        DebugCallbackName="gdb"
+        Version="1"
+        OutputFile="%bdmbed_1768_grove_driver_framework"
+        CompilerConfigName="Latest Version">
+        <Menu>
+            <Target
+                Name="Compile"
+                MenuCaption="&amp;Compile"
+                Dialog="_gnuc_options_form Compile"
+                CaptureOutputWith="ProcessBuffer"
+                Deletable="0"
+                OutputExts="*.o"
+                SaveOption="SaveCurrent"
+                RunFromDir="%rw">
+                <Exec CmdLine='clang++ -c %xup  %defd -g -o "%bd%n%oe" %i "%f"'/>
+            </Target>
+            <Target
+                Name="Link"
+                MenuCaption="&amp;Link"
+                ShowOnMenu="Never"
+                Dialog="_gnuc_options_form Link"
+                CaptureOutputWith="ProcessBuffer"
+                Deletable="0"
+                SaveOption="SaveCurrent"
+                RunFromDir="%rw">
+                <Exec CmdLine='clang++ %xup -g -o "%o" %f %libs'/>
+            </Target>
+            <Target
+                Name="Build"
+                MenuCaption="&amp;Build"
+                CaptureOutputWith="ProcessBuffer"
+                Deletable="0"
+                SaveOption="SaveWorkspaceFiles"
+                RunFromDir="%rw">
+                <Exec CmdLine="make "/>
+            </Target>
+            <Target
+                Name="Rebuild"
+                MenuCaption="&amp;Rebuild"
+                CaptureOutputWith="ProcessBuffer"
+                Deletable="0"
+                SaveOption="SaveWorkspaceFiles"
+                RunFromDir="%rw">
+                <Exec CmdLine=""/>
+            </Target>
+            <Target
+                Name="Debug"
+                MenuCaption="&amp;Debug"
+                Dialog="_gnuc_options_form Run/Debug"
+                BuildFirst="1"
+                CaptureOutputWith="ProcessBuffer"
+                Deletable="0"
+                SaveOption="SaveNone"
+                RunFromDir="%rw">
+                <Exec CmdLine='vsdebugio -prog "%o"'/>
+            </Target>
+            <Target
+                Name="Execute"
+                MenuCaption="E&amp;xecute"
+                Dialog="_gnuc_options_form Run/Debug"
+                BuildFirst="1"
+                CaptureOutputWith="ProcessBuffer"
+                Deletable="0"
+                SaveOption="SaveWorkspaceFiles"
+                RunFromDir="%rw">
+                <Exec CmdLine='"%o"'/>
+            </Target>
+            <Target
+                Name="dash"
+                MenuCaption="-"
+                Deletable="0">
+                <Exec/>
+            </Target>
+            <Target
+                Name="Clang Options"
+                MenuCaption="Clang &amp;Options..."
+                ShowOnMenu="HideIfNoCmdLine"
+                Deletable="0"
+                SaveOption="SaveNone">
+                <Exec
+                    CmdLine="clangoptions"
+                    Type="Slick-C"/>
+            </Target>
+        </Menu>
+        <List Name="GNUC Options">
+            <Item
+                Name="LinkerOutputType"
+                Value="Executable"/>
+        </List>
+    </Config>
+    <Config
+        Name="MacRelease"
+        Type="gnuc"
+        DebugCallbackName="gdb"
+        Version="1"
+        OutputFile="%bdmbed_1768_grove_driver_framework"
+        CompilerConfigName="Latest Version">
+        <Menu>
+            <Target
+                Name="Compile"
+                MenuCaption="&amp;Compile"
+                Dialog="_gnuc_options_form Compile"
+                CaptureOutputWith="ProcessBuffer"
+                Deletable="0"
+                OutputExts="*.o"
+                SaveOption="SaveCurrent"
+                RunFromDir="%rw">
+                <Exec CmdLine='clang++ -c %xup %defd -o "%bd%n%oe" %i "%f"'/>
+            </Target>
+            <Target
+                Name="Link"
+                MenuCaption="&amp;Link"
+                ShowOnMenu="Never"
+                Dialog="_gnuc_options_form Link"
+                CaptureOutputWith="ProcessBuffer"
+                Deletable="0"
+                SaveOption="SaveCurrent"
+                RunFromDir="%rw">
+                <Exec CmdLine='clang++ %xup -o "%o" %f %libs'/>
+            </Target>
+            <Target
+                Name="Build"
+                MenuCaption="&amp;Build"
+                CaptureOutputWith="ProcessBuffer"
+                Deletable="0"
+                SaveOption="SaveWorkspaceFiles"
+                RunFromDir="%rw">
+                <Exec CmdLine="make "/>
+            </Target>
+            <Target
+                Name="Rebuild"
+                MenuCaption="&amp;Rebuild"
+                CaptureOutputWith="ProcessBuffer"
+                Deletable="0"
+                SaveOption="SaveWorkspaceFiles"
+                RunFromDir="%rw">
+                <Exec CmdLine=""/>
+            </Target>
+            <Target
+                Name="Debug"
+                MenuCaption="&amp;Debug"
+                Dialog="_gnuc_options_form Run/Debug"
+                BuildFirst="1"
+                CaptureOutputWith="ProcessBuffer"
+                Deletable="0"
+                SaveOption="SaveNone"
+                RunFromDir="%rw">
+                <Exec CmdLine='vsdebugio -prog "%o"'/>
+            </Target>
+            <Target
+                Name="Execute"
+                MenuCaption="E&amp;xecute"
+                Dialog="_gnuc_options_form Run/Debug"
+                BuildFirst="1"
+                CaptureOutputWith="ProcessBuffer"
+                Deletable="0"
+                SaveOption="SaveWorkspaceFiles"
+                RunFromDir="%rw">
+                <Exec CmdLine='"%o"'/>
+            </Target>
+            <Target
+                Name="dash"
+                MenuCaption="-"
+                Deletable="0">
+                <Exec/>
+            </Target>
+            <Target
+                Name="Clang Options"
+                MenuCaption="Clang &amp;Options..."
+                ShowOnMenu="HideIfNoCmdLine"
+                Deletable="0"
+                SaveOption="SaveNone">
+                <Exec
+                    CmdLine="clangoptions"
+                    Type="Slick-C"/>
+            </Target>
+        </Menu>
+        <List Name="GNUC Options">
+            <Item
+                Name="LinkerOutputType"
+                Value="Executable"/>
+        </List>
+    </Config>
+    <CustomFolders>
+        <Folder
+            Name="Source Files"
+            Filters="*.c;*.C;*.cc;*.cpp;*.cp;*.cxx;*.c++;*.prg;*.pas;*.dpr;*.asm;*.s;*.bas;*.java;*.cs;*.sc;*.e;*.cob;*.html;*.rc;*.tcl;*.py;*.pl;*.d;*.m;*.mm;*.go"></Folder>
+        <Folder
+            Name="Header Files"
+            Filters="*.h;*.H;*.hh;*.hpp;*.hxx;*.inc;*.sh;*.cpy;*.if"></Folder>
+        <Folder
+            Name="Resource Files"
+            Filters="*.ico;*.cur;*.dlg"/>
+        <Folder
+            Name="Bitmaps"
+            Filters="*.bmp"/>
+        <Folder
+            Name="Other Files"
+            Filters=""></Folder>
+    </CustomFolders>
+    <Files AutoFolders="PackageView">
+        <Folder Name="grove_drivers">
+            <F N="grove_drivers/suli2.cpp"/>
+            <F N="grove_drivers/suli2.h"/>
+        </Folder>
+        <Folder Name="grove_drivers/Grove_Example">
+            <F N="grove_drivers/Grove_Example/GroveExample.cpp"/>
+            <F N="grove_drivers/Grove_Example/GroveExample.h"/>
+            <F N="grove_drivers/Grove_Example/GroveExample_Generated.cpp"/>
+            <F N="grove_drivers/Grove_Example/GroveExample_Generated.h"/>
+        </Folder>
+        <Folder Name="grove_rpc_server">
+            <F N="grove_rpc_server/rpc_server.cpp"/>
+            <F N="grove_rpc_server/rpc_server.h"/>
+            <F N="grove_rpc_server/rpc_server_registration.cpp"/>
+            <F N="grove_rpc_server/rpc_stream.cpp"/>
+            <F N="grove_rpc_server/rpc_stream.h"/>
+        </Folder>
+        <Folder Name="mbed">
+            <F N="mbed/AnalogIn.h"/>
+            <F N="mbed/analogin_api.h"/>
+            <F N="mbed/AnalogOut.h"/>
+            <F N="mbed/analogout_api.h"/>
+            <F N="mbed/BusIn.h"/>
+            <F N="mbed/BusInOut.h"/>
+            <F N="mbed/BusOut.h"/>
+            <F N="mbed/CallChain.h"/>
+            <F N="mbed/CAN.h"/>
+            <F N="mbed/can_api.h"/>
+            <F N="mbed/can_helper.h"/>
+            <F N="mbed/DigitalIn.h"/>
+            <F N="mbed/DigitalInOut.h"/>
+            <F N="mbed/DigitalOut.h"/>
+            <F N="mbed/DirHandle.h"/>
+            <F N="mbed/Ethernet.h"/>
+            <F N="mbed/ethernet_api.h"/>
+            <F N="mbed/FileBase.h"/>
+            <F N="mbed/FileHandle.h"/>
+            <F N="mbed/FileLike.h"/>
+            <F N="mbed/FilePath.h"/>
+            <F N="mbed/FileSystemLike.h"/>
+            <F N="mbed/FunctionPointer.h"/>
+            <F N="mbed/gpio_api.h"/>
+            <F N="mbed/gpio_irq_api.h"/>
+            <F N="mbed/I2C.h"/>
+            <F N="mbed/i2c_api.h"/>
+            <F N="mbed/I2CSlave.h"/>
+            <F N="mbed/InterruptIn.h"/>
+            <F N="mbed/InterruptManager.h"/>
+            <F N="mbed/LocalFileSystem.h"/>
+            <F N="mbed/mbed.h"/>
+            <F N="mbed/mbed_assert.h"/>
+            <F N="mbed/mbed_debug.h"/>
+            <F N="mbed/mbed_error.h"/>
+            <F N="mbed/mbed_interface.h"/>
+            <F N="mbed/pinmap.h"/>
+            <F N="mbed/platform.h"/>
+            <F N="mbed/port_api.h"/>
+            <F N="mbed/PortIn.h"/>
+            <F N="mbed/PortInOut.h"/>
+            <F N="mbed/PortOut.h"/>
+            <F N="mbed/PwmOut.h"/>
+            <F N="mbed/pwmout_api.h"/>
+            <F N="mbed/RawSerial.h"/>
+            <F N="mbed/rtc_api.h"/>
+            <F N="mbed/rtc_time.h"/>
+            <F N="mbed/semihost_api.h"/>
+            <F N="mbed/Serial.h"/>
+            <F N="mbed/serial_api.h"/>
+            <F N="mbed/SerialBase.h"/>
+            <F N="mbed/sleep_api.h"/>
+            <F N="mbed/SPI.h"/>
+            <F N="mbed/spi_api.h"/>
+            <F N="mbed/SPISlave.h"/>
+            <F N="mbed/Stream.h"/>
+            <F N="mbed/Ticker.h"/>
+            <F N="mbed/Timeout.h"/>
+            <F N="mbed/Timer.h"/>
+            <F N="mbed/TimerEvent.h"/>
+            <F N="mbed/toolchain.h"/>
+            <F N="mbed/us_ticker_api.h"/>
+            <F N="mbed/wait_api.h"/>
+        </Folder>
+        <Folder Name="mbed/TARGET_LPC1768">
+            <F N="mbed/TARGET_LPC1768/cmsis.h"/>
+            <F N="mbed/TARGET_LPC1768/cmsis_nvic.h"/>
+            <F N="mbed/TARGET_LPC1768/core_ca9.h"/>
+            <F N="mbed/TARGET_LPC1768/core_ca_mmu.h"/>
+            <F N="mbed/TARGET_LPC1768/core_caFunc.h"/>
+            <F N="mbed/TARGET_LPC1768/core_caInstr.h"/>
+            <F N="mbed/TARGET_LPC1768/core_cm0.h"/>
+            <F N="mbed/TARGET_LPC1768/core_cm0plus.h"/>
+            <F N="mbed/TARGET_LPC1768/core_cm3.h"/>
+            <F N="mbed/TARGET_LPC1768/core_cm4.h"/>
+            <F N="mbed/TARGET_LPC1768/core_cm4_simd.h"/>
+            <F N="mbed/TARGET_LPC1768/core_cmFunc.h"/>
+            <F N="mbed/TARGET_LPC1768/core_cmInstr.h"/>
+            <F N="mbed/TARGET_LPC1768/LPC17xx.h"/>
+            <F N="mbed/TARGET_LPC1768/system_LPC17xx.h"/>
+        </Folder>
+        <Folder Name="mbed/TARGET_LPC1768/TARGET_NXP/TARGET_LPC176X">
+            <F N="mbed/TARGET_LPC1768/TARGET_NXP/TARGET_LPC176X/gpio_object.h"/>
+            <F N="mbed/TARGET_LPC1768/TARGET_NXP/TARGET_LPC176X/objects.h"/>
+            <F N="mbed/TARGET_LPC1768/TARGET_NXP/TARGET_LPC176X/PeripheralNames.h"/>
+            <F N="mbed/TARGET_LPC1768/TARGET_NXP/TARGET_LPC176X/PortNames.h"/>
+        </Folder>
+        <Folder Name="mbed/TARGET_LPC1768/TARGET_NXP/TARGET_LPC176X/TARGET_MBED_LPC1768">
+            <F N="mbed/TARGET_LPC1768/TARGET_NXP/TARGET_LPC176X/TARGET_MBED_LPC1768/device.h"/>
+            <F N="mbed/TARGET_LPC1768/TARGET_NXP/TARGET_LPC176X/TARGET_MBED_LPC1768/PinNames.h"/>
+            <F N="mbed/TARGET_LPC1768/TARGET_NXP/TARGET_LPC176X/TARGET_MBED_LPC1768/reserved_pins.h"/>
+        </Folder>
+        <F N="main.cpp"/>
+    </Files>
+</Project>
