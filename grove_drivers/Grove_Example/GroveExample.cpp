@@ -50,7 +50,13 @@ bool grove_example_write_float_value(float f)
     return false;
 }
 
-void _grove_example_internal_function(float x, uint8_t *buff, int len)
+bool grove_example_write_multi_value(int a, float b, int8_t c)
 {
-    *buff = (uint8_t)(x * len);
+    _grove_example_internal_function(b);
+    return true;
+}
+
+void _grove_example_internal_function(float x)
+{
+    ;
 }

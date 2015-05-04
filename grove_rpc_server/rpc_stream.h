@@ -11,6 +11,6 @@ char stream_read();
 
 bool stream_write(char c);
 
-void writer_print(type_t type, const void *data);
+void writer_print(type_t type, const void *data, bool append_comma = false);
 
 #endif

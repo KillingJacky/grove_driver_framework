@@ -25,6 +25,8 @@ bool grove_example_write_acc_mode(uint8_t mode);
 
 bool grove_example_write_float_value(float f);
 
-void _grove_example_internal_function(float x, uint8_t *buff, int len);
+bool grove_example_write_multi_value(int a, float b, int8_t c);
+
+void _grove_example_internal_function(float x);
 
 #endif

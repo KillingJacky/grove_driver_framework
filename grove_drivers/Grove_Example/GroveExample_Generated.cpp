@@ -49,8 +49,8 @@ void __grove_example_read_acc(uint8_t *input)
     float az;
     if(grove_example_read_acc(&ax, &ay, &az))
     {
-        writer_print(TYPE_FLOAT, &ax);
-        writer_print(TYPE_FLOAT, &ay);
+        writer_print(TYPE_FLOAT, &ax, true);
+        writer_print(TYPE_FLOAT, &ay, true);
         writer_print(TYPE_FLOAT, &az);
     } else
     {
@@ -66,9 +66,9 @@ void __grove_example_read_compass(uint8_t *input)
     int degree;
     if(grove_example_read_compass(&cx, &cy, &cz, &degree))
     {
-        writer_print(TYPE_FLOAT, &cx);
-        writer_print(TYPE_FLOAT, &cy);
-        writer_print(TYPE_FLOAT, &cz);
+        writer_print(TYPE_FLOAT, &cx, true);
+        writer_print(TYPE_FLOAT, &cy, true);
+        writer_print(TYPE_FLOAT, &cz, true);
         writer_print(TYPE_INT, &degree);
     } else
     {
@@ -100,4 +100,19 @@ void __grove_example_write_float_value(uint8_t *input)
     {
         writer_print(TYPE_STRING, "Failed");
     }
+}
+
+void __grove_example_write_multi_value(uint8_t *input)
+{
+    int a;
+    float b;
+    int8_t c;
+    
+    a = *((int *)input); input += sizeof(int);
+    b = *((float *)input); input += sizeof(float);
+    c = *((int8_t *)input); input += sizeof(int8_t);
+    if(grove_example_write_multi_value(a,b,c))
+        writer_print(TYPE_STRING, "OK");
+    else
+        writer_print(TYPE_STRING, "Failed");
 }

@@ -2,7 +2,7 @@
 
 #include "rpc_stream.h"
 
-extern Serial pc;
+//extern Serial pc;
 
 void stream_init()
 {
@@ -11,12 +11,14 @@ void stream_init()
 
 char stream_read()
 {
-    return pc.getc();
+    int c = getchar();
+    if (c == EOF) return '\r';
+    return c;
 }
 
 bool stream_write(char c)
 {
-    pc.putc(c);
+    return putchar(c);
 }
 
 bool stream_write_string(char *str, int len)
@@ -27,7 +29,7 @@ bool stream_write_string(char *str, int len)
     }
 }
 
-void writer_print(type_t type, const void *data)
+void writer_print(type_t type, const void *data, bool append_comma)
 {
     char buff[32];
     switch (type)
@@ -45,6 +47,9 @@ void writer_print(type_t type, const void *data)
         case TYPE_INT8:
             sprintf(buff, "%hhd", *(int8_t *)data);
             break;
+        case TYPE_INT:
+            sprintf(buff, "%d", *(int *)data);
+            break;
         case TYPE_INT16:
             sprintf(buff, "%d", *(int16_t *)data);
             break;
@@ -61,4 +66,5 @@ void writer_print(type_t type, const void *data)
             break;
     }
     stream_write_string(buff, 32);
+    if(append_comma) stream_write(',');
 }
