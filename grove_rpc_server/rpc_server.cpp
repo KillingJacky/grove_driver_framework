@@ -49,12 +49,13 @@ void rpc_server_register_method(char *grove_name, char *method_name, method_dir_
 
 }
 
-resource_t* __find_resource(char *name, char *method)
+resource_t* __find_resource(char *name, char *method, int req_type)
 {
     resource_t *ptr;
     for (ptr = p_first_resource; ptr; ptr = ptr->next)
     {
-        if (strncmp(name, ptr->grove_name, 33) == 0 && strncmp(method, ptr->method_name, 33) == 0)
+        if (strncmp(name, ptr->grove_name, 33) == 0 && strncmp(method, ptr->method_name, 33) == 0
+            && req_type == ptr->rw)
         {
             return ptr;
         }
@@ -269,7 +270,7 @@ void rpc_server_loop()
             }
         case CHECK_POST_ARGS:
             {
-                p_resource = __find_resource((char *)grove_name, (char *)method_name);
+                p_resource = __find_resource((char *)grove_name, (char *)method_name, req_type);
                 if (!p_resource)
                 {
                     writer_print(TYPE_STRING, "METHOD NOT FOUND");
@@ -287,7 +288,7 @@ void rpc_server_loop()
             }
         case PRE_PARSE_ARGS:
             {
-                p_resource = __find_resource((char *)grove_name, (char *)method_name);
+                p_resource = __find_resource((char *)grove_name, (char *)method_name, req_type);
                 if (!p_resource)
                 {
                     writer_print(TYPE_STRING, "METHOD NOT FOUND");
@@ -346,7 +347,7 @@ void rpc_server_loop()
         case PARSE_CALL:
             {
                 if(!p_resource)
-                    p_resource = __find_resource((char *)grove_name, (char *)method_name);
+                    p_resource = __find_resource((char *)grove_name, (char *)method_name, req_type);
 
                 if (!p_resource)
                 {
