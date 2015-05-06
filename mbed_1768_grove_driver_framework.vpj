@@ -619,16 +619,18 @@
             Name="Other Files"
             Filters=""></Folder>
     </CustomFolders>
-    <Files AutoFolders="PackageView">
+    <Files AutoFolders="DirectoryView">
         <Folder Name="grove_drivers">
+            <Folder Name="grove_example">
+                <F N="grove_drivers/grove_example/grove_example.cpp"/>
+                <F N="grove_drivers/grove_example/grove_example.h"/>
+                <F N="grove_drivers/grove_example/grove_example_class.cpp"/>
+                <F N="grove_drivers/grove_example/grove_example_class.h"/>
+                <F N="grove_drivers/grove_example/grove_example_gen.cpp"/>
+                <F N="grove_drivers/grove_example/grove_example_gen.h"/>
+            </Folder>
             <F N="grove_drivers/suli2.cpp"/>
             <F N="grove_drivers/suli2.h"/>
-        </Folder>
-        <Folder Name="grove_drivers/Grove_Example">
-            <F N="grove_drivers/Grove_Example/GroveExample.cpp"/>
-            <F N="grove_drivers/Grove_Example/GroveExample.h"/>
-            <F N="grove_drivers/Grove_Example/GroveExample_Generated.cpp"/>
-            <F N="grove_drivers/Grove_Example/GroveExample_Generated.h"/>
         </Folder>
         <Folder Name="grove_rpc_server">
             <F N="grove_rpc_server/rpc_server.cpp"/>
@@ -638,6 +640,66 @@
             <F N="grove_rpc_server/rpc_stream.h"/>
         </Folder>
         <Folder Name="mbed">
+            <Folder Name="TARGET_ARCH_PRO">
+                <Folder Name="TARGET_NXP">
+                    <Folder Name="TARGET_LPC176X">
+                        <Folder Name="TARGET_ARCH_PRO">
+                            <F N="mbed/TARGET_ARCH_PRO/TARGET_NXP/TARGET_LPC176X/TARGET_ARCH_PRO/device.h"/>
+                            <F N="mbed/TARGET_ARCH_PRO/TARGET_NXP/TARGET_LPC176X/TARGET_ARCH_PRO/PinNames.h"/>
+                            <F N="mbed/TARGET_ARCH_PRO/TARGET_NXP/TARGET_LPC176X/TARGET_ARCH_PRO/reserved_pins.h"/>
+                        </Folder>
+                        <F N="mbed/TARGET_ARCH_PRO/TARGET_NXP/TARGET_LPC176X/gpio_object.h"/>
+                        <F N="mbed/TARGET_ARCH_PRO/TARGET_NXP/TARGET_LPC176X/objects.h"/>
+                        <F N="mbed/TARGET_ARCH_PRO/TARGET_NXP/TARGET_LPC176X/PeripheralNames.h"/>
+                        <F N="mbed/TARGET_ARCH_PRO/TARGET_NXP/TARGET_LPC176X/PortNames.h"/>
+                    </Folder>
+                </Folder>
+                <F N="mbed/TARGET_ARCH_PRO/cmsis.h"/>
+                <F N="mbed/TARGET_ARCH_PRO/cmsis_nvic.h"/>
+                <F N="mbed/TARGET_ARCH_PRO/core_ca9.h"/>
+                <F N="mbed/TARGET_ARCH_PRO/core_ca_mmu.h"/>
+                <F N="mbed/TARGET_ARCH_PRO/core_caFunc.h"/>
+                <F N="mbed/TARGET_ARCH_PRO/core_caInstr.h"/>
+                <F N="mbed/TARGET_ARCH_PRO/core_cm0.h"/>
+                <F N="mbed/TARGET_ARCH_PRO/core_cm0plus.h"/>
+                <F N="mbed/TARGET_ARCH_PRO/core_cm3.h"/>
+                <F N="mbed/TARGET_ARCH_PRO/core_cm4.h"/>
+                <F N="mbed/TARGET_ARCH_PRO/core_cm4_simd.h"/>
+                <F N="mbed/TARGET_ARCH_PRO/core_cmFunc.h"/>
+                <F N="mbed/TARGET_ARCH_PRO/core_cmInstr.h"/>
+                <F N="mbed/TARGET_ARCH_PRO/LPC17xx.h"/>
+                <F N="mbed/TARGET_ARCH_PRO/system_LPC17xx.h"/>
+            </Folder>
+            <Folder Name="TARGET_LPC1768">
+                <Folder Name="TARGET_NXP">
+                    <Folder Name="TARGET_LPC176X">
+                        <Folder Name="TARGET_MBED_LPC1768">
+                            <F N="mbed/TARGET_LPC1768/TARGET_NXP/TARGET_LPC176X/TARGET_MBED_LPC1768/device.h"/>
+                            <F N="mbed/TARGET_LPC1768/TARGET_NXP/TARGET_LPC176X/TARGET_MBED_LPC1768/PinNames.h"/>
+                            <F N="mbed/TARGET_LPC1768/TARGET_NXP/TARGET_LPC176X/TARGET_MBED_LPC1768/reserved_pins.h"/>
+                        </Folder>
+                        <F N="mbed/TARGET_LPC1768/TARGET_NXP/TARGET_LPC176X/gpio_object.h"/>
+                        <F N="mbed/TARGET_LPC1768/TARGET_NXP/TARGET_LPC176X/objects.h"/>
+                        <F N="mbed/TARGET_LPC1768/TARGET_NXP/TARGET_LPC176X/PeripheralNames.h"/>
+                        <F N="mbed/TARGET_LPC1768/TARGET_NXP/TARGET_LPC176X/PortNames.h"/>
+                    </Folder>
+                </Folder>
+                <F N="mbed/TARGET_LPC1768/cmsis.h"/>
+                <F N="mbed/TARGET_LPC1768/cmsis_nvic.h"/>
+                <F N="mbed/TARGET_LPC1768/core_ca9.h"/>
+                <F N="mbed/TARGET_LPC1768/core_ca_mmu.h"/>
+                <F N="mbed/TARGET_LPC1768/core_caFunc.h"/>
+                <F N="mbed/TARGET_LPC1768/core_caInstr.h"/>
+                <F N="mbed/TARGET_LPC1768/core_cm0.h"/>
+                <F N="mbed/TARGET_LPC1768/core_cm0plus.h"/>
+                <F N="mbed/TARGET_LPC1768/core_cm3.h"/>
+                <F N="mbed/TARGET_LPC1768/core_cm4.h"/>
+                <F N="mbed/TARGET_LPC1768/core_cm4_simd.h"/>
+                <F N="mbed/TARGET_LPC1768/core_cmFunc.h"/>
+                <F N="mbed/TARGET_LPC1768/core_cmInstr.h"/>
+                <F N="mbed/TARGET_LPC1768/LPC17xx.h"/>
+                <F N="mbed/TARGET_LPC1768/system_LPC17xx.h"/>
+            </Folder>
             <F N="mbed/AnalogIn.h"/>
             <F N="mbed/analogin_api.h"/>
             <F N="mbed/AnalogOut.h"/>
@@ -702,34 +764,13 @@
             <F N="mbed/us_ticker_api.h"/>
             <F N="mbed/wait_api.h"/>
         </Folder>
-        <Folder Name="mbed/TARGET_LPC1768">
-            <F N="mbed/TARGET_LPC1768/cmsis.h"/>
-            <F N="mbed/TARGET_LPC1768/cmsis_nvic.h"/>
-            <F N="mbed/TARGET_LPC1768/core_ca9.h"/>
-            <F N="mbed/TARGET_LPC1768/core_ca_mmu.h"/>
-            <F N="mbed/TARGET_LPC1768/core_caFunc.h"/>
-            <F N="mbed/TARGET_LPC1768/core_caInstr.h"/>
-            <F N="mbed/TARGET_LPC1768/core_cm0.h"/>
-            <F N="mbed/TARGET_LPC1768/core_cm0plus.h"/>
-            <F N="mbed/TARGET_LPC1768/core_cm3.h"/>
-            <F N="mbed/TARGET_LPC1768/core_cm4.h"/>
-            <F N="mbed/TARGET_LPC1768/core_cm4_simd.h"/>
-            <F N="mbed/TARGET_LPC1768/core_cmFunc.h"/>
-            <F N="mbed/TARGET_LPC1768/core_cmInstr.h"/>
-            <F N="mbed/TARGET_LPC1768/LPC17xx.h"/>
-            <F N="mbed/TARGET_LPC1768/system_LPC17xx.h"/>
-        </Folder>
-        <Folder Name="mbed/TARGET_LPC1768/TARGET_NXP/TARGET_LPC176X">
-            <F N="mbed/TARGET_LPC1768/TARGET_NXP/TARGET_LPC176X/gpio_object.h"/>
-            <F N="mbed/TARGET_LPC1768/TARGET_NXP/TARGET_LPC176X/objects.h"/>
-            <F N="mbed/TARGET_LPC1768/TARGET_NXP/TARGET_LPC176X/PeripheralNames.h"/>
-            <F N="mbed/TARGET_LPC1768/TARGET_NXP/TARGET_LPC176X/PortNames.h"/>
-        </Folder>
-        <Folder Name="mbed/TARGET_LPC1768/TARGET_NXP/TARGET_LPC176X/TARGET_MBED_LPC1768">
-            <F N="mbed/TARGET_LPC1768/TARGET_NXP/TARGET_LPC176X/TARGET_MBED_LPC1768/device.h"/>
-            <F N="mbed/TARGET_LPC1768/TARGET_NXP/TARGET_LPC176X/TARGET_MBED_LPC1768/PinNames.h"/>
-            <F N="mbed/TARGET_LPC1768/TARGET_NXP/TARGET_LPC176X/TARGET_MBED_LPC1768/reserved_pins.h"/>
-        </Folder>
+        <F N="build_firmware.py"/>
+        <F N="connection_config.yaml"/>
+        <F N="gen_rpc_wrapper.py"/>
         <F N="main.cpp"/>
+        <F
+            N="Makefile"
+            Type="Makefile"/>
+        <F N="README.md"/>
     </Files>
 </Project>

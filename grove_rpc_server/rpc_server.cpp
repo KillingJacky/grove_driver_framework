@@ -25,7 +25,7 @@ void rpc_server_init()
 }
 
 
-void rpc_server_register_method(char *grove_name, char *method_name, method_dir_t rw, method_ptr_t ptr, uint8_t *arg_types)
+void rpc_server_register_method(char *grove_name, char *method_name, method_dir_t rw, method_ptr_t ptr, void *class_ptr, uint8_t *arg_types)
 {
     resource_t *p_res = (resource_t*)malloc(sizeof(resource_t));
     if (!p_res) return;
@@ -40,10 +40,11 @@ void rpc_server_register_method(char *grove_name, char *method_name, method_dir_
         p_cur_resource = p_res;
     }
 
-    p_cur_resource->grove_name = grove_name;
+    p_cur_resource->grove_name  = grove_name;
     p_cur_resource->method_name = method_name;
-    p_cur_resource->rw = rw;
-    p_cur_resource->method_ptr = ptr;
+    p_cur_resource->rw          = rw;
+    p_cur_resource->method_ptr  = ptr;
+    p_cur_resource->class_ptr   = class_ptr;
     p_cur_resource->next = NULL;
     memcpy(p_cur_resource->arg_types, arg_types, sizeof(p_cur_resource->arg_types));
 
@@ -169,7 +170,7 @@ void rpc_server_loop()
         case PARSE_GET_POST:
             {
                 bool parsed_get_post = false;
-                
+
                 buff[0] = buff[1]; buff[1] = buff[2]; buff[2] = buff[3];
                 buff[3] = stream_read();
                 //printf(" %s\r\n", buff);
@@ -329,7 +330,7 @@ void rpc_server_loop()
                 }
                 if (ch == '\r' || ch == '\n')
                 {
-                    if ((arg_index<3 && p_resource->arg_types[arg_index+1] != TYPE_NONE) || 
+                    if ((arg_index<3 && p_resource->arg_types[arg_index+1] != TYPE_NONE) ||
                         (arg_index<=3 && p_resource->arg_types[arg_index] != TYPE_NONE && strlen(buff)<1))
                     {
                         writer_print(TYPE_STRING, "MISSING ARGS");
@@ -356,7 +357,7 @@ void rpc_server_loop()
                     break;
                 }
                 writer_print(TYPE_STRING, "{");
-                p_resource->method_ptr(arg_buff);
+                p_resource->method_ptr(p_resource->class_ptr, arg_buff);
                 writer_print(TYPE_STRING, "}");
 
                 parse_stage = PARSE_GET_POST;

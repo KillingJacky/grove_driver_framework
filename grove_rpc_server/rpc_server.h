@@ -25,7 +25,7 @@ enum
     REQ_GET, REQ_POST
 };
 
-typedef void (*method_ptr_t)(uint8_t *input);
+typedef void (*method_ptr_t)(void *class_ptr, void *input);
 
 struct resource_s;
 
@@ -36,13 +36,14 @@ typedef struct resource_s
     char                   *method_name;
     method_dir_t           rw;
     method_ptr_t           method_ptr;
+    void                   *class_ptr;
     uint8_t                arg_types[MAX_INPUT_ARG_LEN];
     struct resource_s      *next;
 }resource_t;
 
 void rpc_server_init();
 
-void rpc_server_register_method(char *grove_name, char *method_name, method_dir_t rw, method_ptr_t ptr, uint8_t *arg_types);
+void rpc_server_register_method(char *grove_name, char *method_name, method_dir_t rw, method_ptr_t ptr, void *class_ptr, uint8_t *arg_types);
 
 void rpc_server_register_resources();
 
