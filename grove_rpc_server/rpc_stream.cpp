@@ -60,7 +60,9 @@ void writer_print(type_t type, const void *data, bool append_comma)
             sprintf(buff, "%f", *(float *)data);
             break;
         case TYPE_STRING:
+            stream_write('"');
             stream_write_string((char *)data, 32);
+            stream_write('"');
             return;
         default:
             break;

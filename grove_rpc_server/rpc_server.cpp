@@ -356,9 +356,9 @@ void rpc_server_loop()
                     parse_stage = PARSE_GET_POST;
                     break;
                 }
-                writer_print(TYPE_STRING, "{");
+                writer_print(TYPE_STRING, "[");
                 p_resource->method_ptr(p_resource->class_ptr, arg_buff);
-                writer_print(TYPE_STRING, "}");
+                writer_print(TYPE_STRING, "]");
 
                 parse_stage = PARSE_GET_POST;
                 break;
