@@ -2,7 +2,7 @@
 # see http://mbed.org/handbook/Exporting-to-GCC-ARM-Embedded
 
 GCC_BIN = 
-OUTPUT_BIN = mbed_1768_grove_driver_framework
+OUTPUT_BIN ?= mbed_1768_grove_driver_framework
 
 BASE_DIR = ../..
 SULI_DIR = $(BASE_DIR)/suli
@@ -11,7 +11,7 @@ RPC_SERVER_DIR = $(BASE_DIR)/grove_rpc_server
 BUILD_DIR = .
 OUTPUT = $(BUILD_DIR)/$(OUTPUT_BIN)
 
-GROVES = grove_example
+GROVES ?= grove_example
 
 OBJECTS = main.o suli2.o rpc_server.o rpc_stream.o rpc_server_registration.o
 

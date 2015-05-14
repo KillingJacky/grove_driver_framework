@@ -33,7 +33,8 @@ import json
 
 import yaml
 
-GEN_DIR = './test_gen'
+GEN_DIR = '.'
+
 TYPE_MAP = {
     'int':'TYPE_INT',
     'float':'TYPE_FLOAT',
@@ -182,17 +183,21 @@ def gen_wrapper_registration (instance_name, info, arg_list):
 
 if __name__ == '__main__':
 
-    f_database = open('./database.json','r')
-    js = json.load(f_database)
+    ###generate rpc wrapper and registration files
 
-    f_config = open('./connection_config.yaml','r')
+    cur_dir = os.path.split(os.path.realpath(__file__))[0]
+    f_database = open('%s/database.json' % cur_dir,'r')
+    js = json.load(f_database)
+    print js
+    sys.exit()
+
+    f_config = open('connection_config.yaml','r')
     config = yaml.load(f_config)
 
     if not os.path.exists(GEN_DIR):
         os.mkdir(GEN_DIR)
-    fp_reg_cpp = open(os.path.join(GEN_DIR, "rpc_server_registration.cpp"),'w')
 
-    gen_list = []
+    fp_reg_cpp = open(os.path.join(GEN_DIR, "rpc_server_registration.cpp"),'w')
 
     for grove_instance_name in config.keys():
         grove = find_grove_in_database(config[grove_instance_name]['name'], js)
@@ -218,5 +223,8 @@ if __name__ == '__main__':
             sys.exit()
 
     fp_reg_cpp.close()
+
+    ### make
+
 
 
