@@ -54,7 +54,14 @@ bool grove_example_write_multi_value(I2C_T *i2c, int a, float b, int8_t c)
     return true;
 }
 
+EVENT_T event1;
+
+bool grove_example_attach_event_handler(CALLBACK_T handler)
+{
+    suli_event_init(&event1, handler);
+}
+
 void _grove_example_internal_function(I2C_T *i2c, float x)
 {
-    ;
+    suli_event_trigger(&event1, "fire", 250);
 }

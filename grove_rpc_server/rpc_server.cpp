@@ -8,6 +8,9 @@
 resource_t *p_first_resource;
 resource_t *p_cur_resource;
 
+event_t *p_event_queue_head;
+event_t *p_event_queue_tail;
+
 static int parse_stage;
 
 void rpc_server_init()
@@ -15,8 +18,8 @@ void rpc_server_init()
     //init rpc stream
     stream_init();
     //init rpc server
-    p_first_resource = NULL;
-    p_cur_resource = NULL;
+    p_first_resource = p_cur_resource = NULL;
+    p_event_queue_head = p_event_queue_tail = NULL;
     parse_stage = PARSE_REQ_TYPE;
 
     rpc_server_register_resources();
@@ -161,9 +164,22 @@ static char ch;
 static uint8_t arg_buff[4 * MAX_INPUT_ARG_LEN];
 static int arg_offset;
 static resource_t *p_resource;
+static event_t event;
 
 void rpc_server_loop()
 {
+    /* report event if event queue is not empty */
+    while (rpc_server_event_queue_pop(&event))
+    {
+        response_msg_open("event");
+        writer_print(TYPE_STRING, "{\"");
+        writer_print(TYPE_STRING, event.event_name);
+        writer_print(TYPE_STRING, "\":\"");
+        writer_print(TYPE_UINT32, &event.event_data);
+        writer_print(TYPE_STRING, "\"}");
+        response_msg_close();
+    }
+
     //writer_print(TYPE_INT, &parse_stage);
     switch (parse_stage)
     {
@@ -193,7 +209,7 @@ void rpc_server_loop()
                     parsed_req_type = true;
                     parse_stage = DIVE_INTO_OTA;
                     response_msg_open("ota_trig_ack");
-                    response_msg_close()
+                    response_msg_close();
                     break;
                 }
                 if (parsed_req_type)
@@ -392,4 +408,37 @@ void rpc_server_loop()
             break;
     }
 
+}
+
+
+void rpc_server_event_report(char *event_name, uint32_t event_data)
+{
+    __disable_irq();
+    event_t *ev = (event_t *)malloc(sizeof(event_t));
+    ev->event_name = event_name;
+    ev->event_data = event_data;
+    ev->prev = p_event_queue_tail;
+    ev->next = NULL;
+    p_event_queue_tail = ev;
+    if (ev->prev == NULL)
+    {
+        p_event_queue_head = ev;
+    }
+    __enable_irq();
+}
+
+bool rpc_server_event_queue_pop(event_t *event)
+{
+    bool ret = false;
+    __disable_irq();
+    if (p_event_queue_head != NULL)
+    {
+        memcpy(event, p_event_queue_head, sizeof(event_t));
+        event_t *tmp = p_event_queue_head;
+        p_event_queue_head = tmp->next;
+        free(tmp);
+        ret = true;
+    }
+    __enable_irq();
+    return ret;
 }

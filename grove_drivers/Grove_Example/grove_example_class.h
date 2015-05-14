@@ -21,6 +21,7 @@ public:
     bool write_acc_mode(uint8_t mode);
     bool write_float_value(float f);
     bool write_multi_value(int a, float b, int8_t c);
+    bool attach_event_handler(CALLBACK_T handler);
 
 private:
     I2C_T *i2c;

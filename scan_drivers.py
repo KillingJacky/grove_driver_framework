@@ -98,6 +98,15 @@ def parse_class_header_file (file):
         writes[func[0]] = args
     patterns["Inputs"] = writes
 
+    ## event
+    # bool attach_event_handler(CALLBACK_T handler);
+    event_attachments = re.findall(r'bool\s+(attach_event_handler)\((.*)\);', content, re.M)
+    print event_attachments
+    if len(event_attachments) > 0:
+        patterns["HasEvent"] = True
+    else:
+        patterns["HasEvent"] = False
+
     return ("OK",patterns)
 
 

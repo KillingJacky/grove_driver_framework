@@ -173,7 +173,9 @@ def gen_wrapper_registration (instance_name, info, arg_list):
         str_reg_method += '    rpc_server_register_method("%s", "%s", METHOD_WRITE, %s, %s, arg_types);\r\n' % \
                           (instance_name, fun[0].replace('write_',''), '__'+grove_name+'_'+fun[0], instance_name)
 
-
+    # event attachment
+    if info['HasEvent']:
+        str_reg_method += '\r\n    %s->attach_event_handler(rpc_server_event_report);\r\n' % instance_name
 
     fp_wrapper_h.close()
     fp_wrapper_cpp.close()
@@ -188,8 +190,6 @@ if __name__ == '__main__':
     cur_dir = os.path.split(os.path.realpath(__file__))[0]
     f_database = open('%s/database.json' % cur_dir,'r')
     js = json.load(f_database)
-    print js
-    sys.exit()
 
     f_config = open('connection_config.yaml','r')
     config = yaml.load(f_config)

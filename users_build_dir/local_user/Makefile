@@ -13,7 +13,7 @@ OUTPUT = $(BUILD_DIR)/$(OUTPUT_BIN)
 
 GROVES ?= grove_example
 
-OBJECTS = main.o suli2.o rpc_server.o rpc_stream.o rpc_server_registration.o
+OBJECTS = main.o user_main.o suli2.o rpc_server.o rpc_stream.o rpc_server_registration.o
 
 SYS_PATHS = $(BASE_DIR)/mbed/TARGET_LPC1768/TOOLCHAIN_GCC_ARM
 SYS_OBJECTS = cmsis_nvic.o system_LPC17xx.o board.o retarget.o startup_LPC17xx.o 

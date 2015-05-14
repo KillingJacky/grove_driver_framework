@@ -809,6 +809,7 @@
                 <F N="users_build_dir/local_user/mbed_1768_grove_driver_framework.hex"/>
                 <F N="users_build_dir/local_user/mbed_1768_grove_driver_framework.map"/>
                 <F N="users_build_dir/local_user/rpc_server_registration.cpp"/>
+                <F N="users_build_dir/local_user/user_main.cpp"/>
             </Folder>
         </Folder>
         <F N="build_firmware.py"/>

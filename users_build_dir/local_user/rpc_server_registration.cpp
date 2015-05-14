@@ -27,4 +27,6 @@ void rpc_server_register_resources()
     memset(arg_types, TYPE_NONE, MAX_INPUT_ARG_LEN);
     arg_types[0] = TYPE_FLOAT;
     rpc_server_register_method("Grove_Example1", "float_value", METHOD_WRITE, __grove_example_write_float_value, Grove_Example1, arg_types);
+
+    Grove_Example1->attach_event_handler(rpc_server_event_report);
 }

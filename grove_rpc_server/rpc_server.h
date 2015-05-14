@@ -17,7 +17,7 @@ typedef enum
 
 enum
 {
-    PARSE_GET_POST, PARSE_GROVE_NAME, PARSE_METHOD, CHECK_POST_ARGS, PRE_PARSE_ARGS, PARSE_ARGS, PARSE_CALL, DIVE_INTO_OTA
+    PARSE_REQ_TYPE, PARSE_GROVE_NAME, PARSE_METHOD, CHECK_POST_ARGS, PRE_PARSE_ARGS, PARSE_ARGS, PARSE_CALL, DIVE_INTO_OTA
 };
 
 enum
@@ -41,6 +41,15 @@ typedef struct resource_s
     struct resource_s      *next;
 }resource_t;
 
+struct event_s;
+typedef struct event_s
+{
+    struct event_s          *prev;
+    struct event_s          *next;
+    char                    *event_name;
+    uint32_t                event_data;
+}event_t;
+
 void rpc_server_init();
 
 void rpc_server_register_method(char *grove_name, char *method_name, method_dir_t rw, method_ptr_t ptr, void *class_ptr, uint8_t *arg_types);
@@ -48,5 +57,8 @@ void rpc_server_register_method(char *grove_name, char *method_name, method_dir_
 void rpc_server_register_resources();
 
 void rpc_server_loop();
+
+void rpc_server_event_report(char *event_name, uint32_t event_data);
+bool rpc_server_event_queue_pop(event_t *event);
 
 #endif
