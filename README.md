@@ -21,8 +21,19 @@
   * 第一层驱动实现中所有对外开放的写/配置函数必须以grove_grovename_write_ 打头
   * class封装中所有对外开放的写/配置函数必须以write_ 打头
   * class封装中构造函数的参数只能是硬件相关的,例如pin脚, 除硬件外所有配置均通过write写入
+  * class封装中构造函数的参数按接口类型不同,分别有固定参数,参下一节"构造函数参数"
   * 第一层及第二层封装中所有非对外开放的函数/内部函数均以下划线打头
   * 所有read/write函数返回类型为bool
   * 所有read函数数值通过指针向外透出, 参数个数不限
   * 所有write函数参数个数不能超过4个
   * class封装中成员方法的参数数值类型支持{int, float, char, int8_t, uint8_t, int16_t, uint16_t, int32_t, uint32_t}及他们的指针型
+  * class封装层中事件绑定函数的命名必须为attach_event_handler(才能被脚本扫到)
+  * 需要上报事件时, EVENT_T全局事件变量的定义放到第一层驱动封装中, 因为事件触发是由底层到上层
+  
+  
+*构造函数参数
+  * GPIO类型: 参数为(int pin)
+  * PWM类型: 参数为(int pin)
+  * ANALOG类型: 参数为(int pin)
+  * I2C类型: 参数为(int pinsda, int pinscl)
+  * UART类型: 参数为(int pintx, int pinrx)
