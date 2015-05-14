@@ -13,4 +13,8 @@ bool stream_write(char c);
 
 void writer_print(type_t type, const void *data, bool append_comma = false);
 
+void response_msg_open(const char *msg_type);
+
+void response_msg_close();
+
 #endif

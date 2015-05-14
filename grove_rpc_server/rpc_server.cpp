@@ -17,7 +17,7 @@ void rpc_server_init()
     //init rpc server
     p_first_resource = NULL;
     p_cur_resource = NULL;
-    parse_stage = PARSE_GET_POST;
+    parse_stage = PARSE_REQ_TYPE;
 
     rpc_server_register_resources();
     printf("rpc server init done!\n");
@@ -167,9 +167,9 @@ void rpc_server_loop()
     //writer_print(TYPE_INT, &parse_stage);
     switch (parse_stage)
     {
-        case PARSE_GET_POST:
+        case PARSE_REQ_TYPE:
             {
-                bool parsed_get_post = false;
+                bool parsed_req_type = false;
 
                 buff[0] = buff[1]; buff[1] = buff[2]; buff[2] = buff[3];
                 buff[3] = stream_read();
@@ -177,21 +177,33 @@ void rpc_server_loop()
                 if (memcmp(buff, "GET", 3) == 0 || memcmp(buff, "get", 3) == 0)
                 {
                     req_type = REQ_GET;
-                    parsed_get_post = true;
+                    parsed_req_type = true;
+                    response_msg_open("resp_get");
                 }
                 if (memcmp(buff, "POST", 4) == 0 || memcmp(buff, "post", 4) == 0)
                 {
                     req_type = REQ_POST;
-                    parsed_get_post = true;
+                    parsed_req_type = true;
                     stream_read();  //read " " out
+                    response_msg_open("resp_post");
                 }
-                if(parsed_get_post)
+                if (memcmp(buff, "OTA", 3) == 0 || memcmp(buff, "ota", 3) == 0)
+                {
+                    req_type = REQ_OTA;
+                    parsed_req_type = true;
+                    parse_stage = DIVE_INTO_OTA;
+                    response_msg_open("ota_trig_ack");
+                    response_msg_close()
+                    break;
+                }
+                if (parsed_req_type)
                 {
                     ch = stream_read();
                     if (ch != '/')
                     {
                         //error request format
                         writer_print(TYPE_STRING, "BAD REQUEST: missing root:'/'.");
+                        response_msg_close();
                     } else
                     {
                         parse_stage = PARSE_GROVE_NAME;
@@ -211,11 +223,13 @@ void rpc_server_loop()
                     if(strcmp(buff, ".well-known") == 0)
                     {
                         writer_print(TYPE_STRING, "/.well-known is not implemented");
-                        parse_stage = PARSE_GET_POST;
+                        response_msg_close();
+                        parse_stage = PARSE_REQ_TYPE;
                     }else
                     {
                         writer_print(TYPE_STRING, "BAD REQUEST: missing method name.");
-                        parse_stage = PARSE_GET_POST;
+                        response_msg_close();
+                        parse_stage = PARSE_REQ_TYPE;
                     }
                 }
                 else if (ch != '/' && offset <= 31)
@@ -275,13 +289,15 @@ void rpc_server_loop()
                 if (!p_resource)
                 {
                     writer_print(TYPE_STRING, "METHOD NOT FOUND");
-                    parse_stage = PARSE_GET_POST;
+                    response_msg_close();
+                    parse_stage = PARSE_REQ_TYPE;
                     break;
                 }
                 if (p_resource->arg_types[0] != TYPE_NONE)
                 {
                     writer_print(TYPE_STRING, "MISSING ARGS");
-                    parse_stage = PARSE_GET_POST;
+                    response_msg_close();
+                    parse_stage = PARSE_REQ_TYPE;
                     break;
                 }
                 parse_stage = PARSE_CALL;
@@ -293,7 +309,8 @@ void rpc_server_loop()
                 if (!p_resource)
                 {
                     writer_print(TYPE_STRING, "METHOD NOT FOUND");
-                    parse_stage = PARSE_GET_POST;
+                    response_msg_close();
+                    parse_stage = PARSE_REQ_TYPE;
                     break;
                 }
                 parse_stage = PARSE_ARGS;
@@ -334,7 +351,8 @@ void rpc_server_loop()
                         (arg_index<=3 && p_resource->arg_types[arg_index] != TYPE_NONE && strlen(buff)<1))
                     {
                         writer_print(TYPE_STRING, "MISSING ARGS");
-                        parse_stage = PARSE_GET_POST;
+                        response_msg_close();
+                        parse_stage = PARSE_REQ_TYPE;
                         break;
                     }
                     char *p = buff;
@@ -353,14 +371,21 @@ void rpc_server_loop()
                 if (!p_resource)
                 {
                     writer_print(TYPE_STRING, "METHOD NOT FOUND");
-                    parse_stage = PARSE_GET_POST;
+                    response_msg_close();
+                    parse_stage = PARSE_REQ_TYPE;
                     break;
                 }
                 writer_print(TYPE_STRING, "[");
                 p_resource->method_ptr(p_resource->class_ptr, arg_buff);
                 writer_print(TYPE_STRING, "]");
+                response_msg_close();
 
-                parse_stage = PARSE_GET_POST;
+                parse_stage = PARSE_REQ_TYPE;
+                break;
+            }
+        case DIVE_INTO_OTA:
+            {
+                //TODO: refer to the ota related code here
                 break;
             }
         default:

@@ -206,16 +206,19 @@ class NodeReadWriteHandler(RequestHandler):
     def post (self, node_id, grove_name, method):
         print "post", node_id, grove_name, method, self.request.body
 
+        if self.request.body.find("&") > 0 and self.request.body.find(",") > 0:
+            self.write("Bad format of the post body\r\nAllowed format:\r\n")
+            self.write("1. arg1=value1&arg2=value2 in order\r\n")
+            self.write("2. value1,value2 in order\r\n")
+            return
+
         if self.request.body.find("&") > 0:
             arg_list = self.request.body.split('&')
         else:
             arg_list = self.request.body.split(',')
 
-        if arg_list[0] == "":
-            self.write("Bad format of the post body\r\nAllowed format:\r\n")
-            self.write("1. arg1=value1&arg2=value2 in order\r\n")
-            self.write("2. value1,value2 in order\r\n")
-            return
+        if len(arg_list) == 1 and arg_list[0] == "":
+            arg_list = []
 
         cmd_args = ""
         for arg in arg_list:
